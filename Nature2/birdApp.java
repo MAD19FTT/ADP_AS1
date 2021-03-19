@@ -17,7 +17,7 @@ public class birdApp extends Application{
 		Background ground = new Background();
 		
 		Scene scene = new Scene(ground,1000,600);
-		scene.setFill(Color.BLUE);
+		scene.setFill(Color.LIGTHBLUE);
 		
 		arg0.setScene(scene);
 		arg0.show();

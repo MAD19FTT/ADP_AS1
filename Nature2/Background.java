@@ -8,7 +8,7 @@ public class Background extends Pane{
 	
 	public Background() {
 		Rectangle ground = new Rectangle(0,400,1000,500);
-		ground.setFill(Color.BROWN);
+		ground.setFill(Color.BURLYWOOD);
 		
 		Line branch = new Line();
 		branch.setStartX(150); 
@@ -26,7 +26,7 @@ public class Background extends Pane{
 		smallBranch.setStrokeWidth(30);
 		smallBranch.setStroke(Color.BLACK);
 		
-		Circle leave1 = new Circle(150,50,30);
+		Circle leave1 = new Circle(150,50,35);
 		leave1.setFill(Color.GREEN);
 		Circle leave2 = new Circle(110,50,30);
 		leave2.setFill(Color.GREEN);
@@ -44,9 +44,9 @@ public class Background extends Pane{
 		leave8.setFill(Color.GREEN);
 		Circle leave9 = new Circle(120,0,30);
 		leave9.setFill(Color.GREEN);
-		Circle leave10 = new Circle(80,30,30);
+		Circle leave10 = new Circle(80,30,45);
 		leave10.setFill(Color.GREEN);
-		Circle leave11 = new Circle(220,30,30);
+		Circle leave11 = new Circle(220,30,45);
 		leave11.setFill(Color.GREEN);
 	
 		
@@ -69,4 +69,6 @@ public class Background extends Pane{
 				
 				);
 	}
+	
 }
+

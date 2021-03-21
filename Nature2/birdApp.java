@@ -1,19 +1,23 @@
 package Nature2;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BackgroundFill;
+//import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
 
 public class birdApp extends Application{
 	double orgSceneX, orgSceneY;
-	boolean captureCircle = false;
+	boolean birdflip = false;
+	boolean captureWorm = false;
+	
 
 	@Override
 	public void start(Stage arg0) throws Exception {
@@ -24,11 +28,13 @@ public class birdApp extends Application{
 		
 		Background ground = new Background();
 		Bird bird = new Bird();
-//		bird.setBackground(new javafx.scene.layout.Background(new BackgroundFill(Color.ALICEBLUE, null, null)));
+		//Beak beak = new Beak();
 		babyBird baby = new babyBird();
+		Worm worm = new Worm();
 		
-		Circle circle = new Circle(800, 500, 10);
-		
+		//worm.setBackground(new javafx.scene.layout.Background(new BackgroundFill(Color.ALICEBLUE, null, null)));
+		//System.out.print(worm.getScaleX());
+	
 		bird.setOnMousePressed(e -> {
 		
 			
@@ -49,9 +55,12 @@ public class birdApp extends Application{
 			b.setLayoutX(b.getLayoutX() + offsetX);
 			b.setLayoutY(b.getLayoutY() + offsetY);
 			
-			if(captureCircle == true) {
-				circle.setLayoutX(circle.getLayoutX() + offsetX);
-				circle.setLayoutY(circle.getLayoutY() + offsetY);
+			//beak.setLayoutX(beak.getLayoutX() + offsetX);
+			//beak.setLayoutY(beak.getLayoutY() + offsetY);
+			
+			if(captureWorm == true) {
+				worm.setLayoutX(worm.getLayoutX() + offsetX);
+				worm.setLayoutY(worm.getLayoutY() + offsetY);
 			}
 			
 			orgSceneX = e.getSceneX();
@@ -59,40 +68,74 @@ public class birdApp extends Application{
 			
 			if(offsetX >+ 0) {
 				b.flipRight();
+				
 			}
 			else if(offsetX <0){
 				b.flipLeft();
+				//if(birdflip = true) {
+					//worm.flipLeft();
+				//}
 			}
 			
 			
 		});
 	
 		
-		
-//		Timeline animation = new Timeline(new KeyFrame(Duration.millis(50), e->{}));
-//		animation.setCycleCount(Timeline.INDEFINITE);
-//		animation.play();
-		
 		Pane root = new Pane();
-		root.getChildren().addAll(ground, bird, baby, circle);
+		root.getChildren().addAll(ground, bird, baby, worm);
 		
 		Scene scene = new Scene(root,1000,600);
 		scene.setFill(Color.LIGHTBLUE);
 		
-		scene.addEventFilter(MouseEvent.MOUSE_PRESSED, e-> {
-			bird.toFront();
+		Timeline animation = new Timeline(new KeyFrame(Duration.millis(500), e->{
+			baby.moveBeak();
+			
+		}));
+		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.play();
+		
+		 Timeline animation2 = new Timeline(new KeyFrame(Duration.millis(5000), e -> {
+				
+			  int random = (int) ((Math.random() * (450 - 200)) + 250);
+				 worm.setLayoutX(random);
+				 worm.moveUp();
+			  }));
+		 animation2.setCycleCount(Timeline.INDEFINITE);
+		 animation2.play();
+	
+		
+		scene.addEventFilter(KeyEvent.KEY_PRESSED, e ->{ // Press space to start the animation
+			if(KeyCode.SPACE == e.getCode()) {
+				bird.toFront();
+				bird.moveWing();
+				
+			}
 		});
 		
-		scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+		
+		scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> { //Press M to grab the worm
 			if(KeyCode.M == e.getCode()) {
-				if(bird.getBoundsInParent().intersects(circle.getBoundsInParent())) {
-					captureCircle = true;
+				if(bird.getBoundsInParent().intersects(worm.getBoundsInParent())) {
+					captureWorm = true;
+					birdflip = true;
+					animation2.pause();
+					//worm.moveUp.pause();
 				}
 			}
-			if(KeyCode.N == e.getCode()) {
-				captureCircle = false;
+			if(KeyCode.N == e.getCode()) { // Press N to release the worm
+				captureWorm = false;
+				if(worm.getBoundsInParent().intersects(baby.getBoundsInParent())) {
+					worm.setVisible(false);
+					animation.pause();
+				}
 			}
 		});
+	
+		
+		//scene.addEventFilter(MouseEvent.MOUSE_PRESSED, e-> {
+		//	bird.toFront();
+		//baby.moveBeak();
+		//});
 		
 		arg0.setScene(scene);
 		arg0.show();

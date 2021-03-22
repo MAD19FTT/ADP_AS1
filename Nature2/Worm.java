@@ -14,76 +14,76 @@ public class Worm extends Pane {
 	public Worm() {
 		
 		QuadCurve head = new QuadCurve(
-				525, 255,
-				532.5, 236.25,
-				540, 255
+				0, 40,
+				10, 15,
+				20, 40
 				);
 		head.setFill(Color.PEACHPUFF);
 		head.setStroke(Color.BLACK);
 		
 		Polygon body1 = new Polygon(
-				525, 255,
-				540, 255,
-				540, 270,
-				525, 270
+				0, 40,
+				20, 40,
+				20, 60,
+				0, 60
 				);
 		body1.setFill(Color.PEACHPUFF);
 		body1.setStroke(Color.BLACK);
 		
 		Polygon body2 = new Polygon(
-				525, 270,
-				540, 270,
-				540, 285,
-				525, 285
+				0, 60,
+				20, 60,
+				20, 80,
+				0, 80
 				);
 		body2.setFill(Color.PEACHPUFF);
 		body2.setStroke(Color.BLACK);
 		
 		Polygon body3 = new Polygon(
-				525, 285,
-				540, 285,
-				540, 300,
-				525, 300
+				0, 80,
+				20, 80,
+				20, 100,
+				0, 100
 				);
 		body3.setFill(Color.PEACHPUFF);
 		body3.setStroke(Color.BLACK);
 		
 		Polygon body4 = new Polygon(
-				525, 300,
-				540, 300,
-				540, 315,
-				525, 315
+				0, 100,
+				20, 100,
+				20, 120,
+				0, 120
 				);
 		body4.setFill(Color.PEACHPUFF);
 		body4.setStroke(Color.BLACK);
 		
 		Polygon body5 = new Polygon(
-				525, 315,
-				540, 315,
-				540, 330,
-				525, 330
+				0, 120,
+				20, 120,
+				20, 140,
+				0, 140
 				);
 		body5.setFill(Color.PEACHPUFF);
 		body5.setStroke(Color.BLACK);
 		
 		Polygon body6 = new Polygon(
-				525, 330,
-				540, 330,
-				540, 345,
-				525, 345
+				0, 140,
+				20, 140,
+				20, 160,
+				0, 160
 				);
 		body6.setFill(Color.PEACHPUFF);
 		body6.setStroke(Color.BLACK);
 		
 		QuadCurve tail = new QuadCurve(
-				540, 345.75,
-				532.5, 352.5,
-				525, 345.75
+				20, 161,
+				10, 170,
+				0, 161
 				);
 		tail.setFill(Color.PEACHPUFF);
 		tail.setStroke(Color.BLACK);
 		
-		Circle eye = new Circle(531,249,1);
+		Circle eye = new Circle(8,32,1);
 		eye.setFill(Color.BLACK);
 		
 		this.getChildren().addAll(
@@ -97,11 +97,14 @@ public class Worm extends Pane {
 				tail,
 				eye
 				);
-		this.setTranslateY(100);
+		this.setScaleX(0.75);
+		this.setScaleY(0.75);
+		this.setTranslateX(400);
+		this.setTranslateY(300);
 		
 	}
 
-	public void moveUp() {
+	public void moveUp(boolean capture) {
 		TranslateTransition move = new TranslateTransition();
 		move.setNode(this);
 		move.setByY(-70);
@@ -109,7 +112,15 @@ public class Worm extends Pane {
 		move.setCycleCount(300);
 		move.setDuration(Duration.millis(500));
 		move.play();
+	
+		if(capture = false) {
+			move.play();
+		}else {
+			System.out.println(capture);
+		}
+		
 	}
+	
 
 	public void flipRight() {
 		this.setTranslateX((this.getTranslateX()) + 190);

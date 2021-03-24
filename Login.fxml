@@ -1,0 +1,28 @@
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import java.net.URL?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+	fx:controller="controller.LoginController">  
+	<stylesheets>
+		<URL value="@app.css" />
+	</stylesheets>
+	<Label styleClass="title" text="Student Management" />
+	<HBox>
+		<Label text="Username:" />
+		<TextField fx:id="usernameTextField"/>
+	</HBox>
+	<HBox fx:id="passwordHBox">
+		<Label text="Password:" />
+		<PasswordField fx:id="passwordPasswordField"/>
+		<!-- <TextField fx:id="usernameTextField"/> -->
+	</HBox>
+	<HBox>
+		<CheckBox text="Show Password" onAction="#showPassword"/>
+	</HBox>
+	<HBox>
+		<Button text="Login" onAction="#login"/>
+		<Button text="Clear" onAction="#clear"/>
+	</HBox>
+	<Label styleClass ="Label" fx:id="errorLabel"/>
+</VBox>

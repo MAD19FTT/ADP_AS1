@@ -1,0 +1,10 @@
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox>
+	<HBox>
+		<Button text="Yes" />
+		<Button text="No" />
+	</HBox>
+	<TextField />
+</VBox>
